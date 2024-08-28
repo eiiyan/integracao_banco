@@ -24,4 +24,49 @@ class UsuarioController extends Controller
 
 
     }
+
+    public function findById($id){
+        $result = $this->usuarioService->findById($id); 
+
+        return response()->json($result); // resposta para json 
+
+    }
+
+    public function index(){
+        $result = $this->usuarioService->getAll(); // não recebe nenhum parâmetro pois não vai pesquisar por nada
+
+        return response()->json($result);
+        
+    }
+
+    public function searchByName(Request $request){ // request porque vai pesquisar pelo nome
+        $result = $this->usuarioService->searchByName($request->email);
+
+        return response()->json($result);
+
+        
+    }
+
+    public function searchByEmail(Request $request){
+        $result = $this->usuarioService->searchByEmail($request->email); // tudo que tem entrada recebe uma request
+
+        return response()->json($result);
+
+    }
+
+    public function delete($id){
+        $result = $this->usuarioService->delete($id);
+
+        return response()->json($result);
+
+
+    }
+
+    public function update(Request $request){
+        $result = $this->usuarioService->update($request->all()); // todos os dados da request
+
+        return response()->json($result);
+
+    }
+
 }
